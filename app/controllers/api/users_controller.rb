@@ -2,10 +2,9 @@ class Api::UsersController < ApplicationController
 	before_action :get_user, only: [:update, :show, :destroy]
 
 	def index
-		users = User.all
 		page = params[:page]||User::PAGE
 		per_page = params[:per_page]||User::PER_PAGE
-		users = users.paginate(page:page, per_page: per_page)		
+		users = User.paginate(page:page, per_page: per_page)		
 		render json:{
 			current_page:users.current_page,
 			per_page:per_page.to_i,
