@@ -1,0 +1,1297 @@
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (105.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (77.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20200929161725)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "firstName" varchar, "lastName" varchar, "email" varchar DEFAULT '' NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20200929161725"]]
+  [1m[35m (105.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-09-29 16:19:02.330123"], ["updated_at", "2020-09-29 16:19:02.330123"]]
+  [1m[35m (73.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: Using `bin/rake routes` is deprecated and will be removed in Rails 6.1. Use `bin/rails routes` instead.
+ (called from load at /home/user/.rvm/gems/ruby-2.6.0/bin/rake:23)
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ?[0m  [["LIMIT", 11]]
+DEPRECATION WARNING: Using `bin/rake routes` is deprecated and will be removed in Rails 6.1. Use `bin/rails routes` instead.
+ (called from load at /home/user/.rvm/gems/ruby-2.6.0/bin/rake:23)
+Started POST "/api/v1/users" for ::1 at 2020-09-29 22:04:54 +0530
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::UsersController#create as JSON
+  Parameters: {"email"=>"test1@gmail.com", "firstName"=>"test1", "lastName"=>"test2"}
+[31mUnpermitted parameter: :format[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "test1@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `create'
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("firstName", "lastName", "email", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["firstName", "test1"], ["lastName", "test2"], ["email", "test1@gmail.com"], ["created_at", "2020-09-29 16:34:54.269169"], ["updated_at", "2020-09-29 16:34:54.269169"]]
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `create'
+  [1m[35m (84.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `create'
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:9:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "test1@gmail.com"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:9:in `create'
+  [1m[35m (0.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:9:in `create'
+Completed 500 Internal Server Error in 130ms (ActiveRecord: 87.4ms | Allocations: 14055)
+
+
+  
+NameError (uninitialized constant Api::V1::UsersController::UserSerializer
+Did you mean?  UsersSerializer):
+  
+app/controllers/api/v1/users_controller.rb:10:in `create'
+Started POST "/api/v1/users" for ::1 at 2020-09-29 22:05:13 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::V1::UsersController#create as JSON
+  Parameters: {"email"=>"test1@gmail.com", "firstName"=>"test1", "lastName"=>"test2"}
+[31mUnpermitted parameter: :format[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "test1@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `create'
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `create'
+Completed 422 Unprocessable Entity in 100ms (ActiveRecord: 1.3ms | Allocations: 10904)
+
+
+  
+ActiveRecord::RecordInvalid (Validation failed: Email has already been taken):
+  
+app/controllers/api/v1/users_controller.rb:8:in `create'
+Started POST "/api/v1/users" for ::1 at 2020-09-29 22:05:23 +0530
+Processing by Api::V1::UsersController#create as JSON
+  Parameters: {"email"=>"test2@gmail.com", "firstName"=>"test1", "lastName"=>"test2"}
+[31mUnpermitted parameter: :format[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "test2@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `create'
+  [1m[36mUser Create (1.3ms)[0m  [1m[32mINSERT INTO "users" ("firstName", "lastName", "email", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["firstName", "test1"], ["lastName", "test2"], ["email", "test2@gmail.com"], ["created_at", "2020-09-29 16:35:23.922640"], ["updated_at", "2020-09-29 16:35:23.922640"]]
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `create'
+  [1m[35m (132.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `create'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:9:in `create'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "test2@gmail.com"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:9:in `create'
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:9:in `create'
+[active_model_serializers] Rendered UsersSerializer with ActiveModelSerializers::Adapter::Attributes (5.98ms)
+Completed 500 Internal Server Error in 198ms (ActiveRecord: 134.7ms | Allocations: 11629)
+
+
+  
+NoMethodError (undefined method `model_name' for UsersSerializer:Class
+Did you mean?  module_parent):
+  
+app/controllers/api/v1/users_controller.rb:10:in `create'
+Started POST "/api/v1/users" for ::1 at 2020-09-29 22:07:13 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::V1::UsersController#create as JSON
+  Parameters: {"email"=>"test2@gmail.com", "firstName"=>"test1", "lastName"=>"test2"}
+[31mUnpermitted parameter: :format[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "test2@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `create'
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `create'
+Completed 422 Unprocessable Entity in 31ms (ActiveRecord: 1.6ms | Allocations: 7822)
+
+
+  
+ActiveRecord::RecordInvalid (Validation failed: Email has already been taken):
+  
+app/controllers/api/v1/users_controller.rb:8:in `create'
+Started POST "/api/v1/users" for ::1 at 2020-09-29 22:07:20 +0530
+Processing by Api::V1::UsersController#create as JSON
+  Parameters: {"email"=>"test3@gmail.com", "firstName"=>"test1", "lastName"=>"test2"}
+[31mUnpermitted parameter: :format[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `create'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "test3@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `create'
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("firstName", "lastName", "email", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["firstName", "test1"], ["lastName", "test2"], ["email", "test3@gmail.com"], ["created_at", "2020-09-29 16:37:20.378216"], ["updated_at", "2020-09-29 16:37:20.378216"]]
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `create'
+  [1m[35m (167.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `create'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:9:in `create'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "test3@gmail.com"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:9:in `create'
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:9:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.21ms)
+Completed 200 OK in 220ms (Views: 20.2ms | ActiveRecord: 169.8ms | Allocations: 8020)
+
+
+Started GET "/users" for ::1 at 2020-09-29 22:08:18 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+actionpack (6.0.3.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3.3) lib/rails/engine.rb:527:in `call'
+puma (4.3.6) lib/puma/configuration.rb:228:in `call'
+puma (4.3.6) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.6) lib/puma/server.rb:472:in `process_client'
+puma (4.3.6) lib/puma/server.rb:328:in `block in run'
+puma (4.3.6) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/api/v1users" for ::1 at 2020-09-29 22:08:34 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/api/v1users"):
+  
+actionpack (6.0.3.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3.3) lib/rails/engine.rb:527:in `call'
+puma (4.3.6) lib/puma/configuration.rb:228:in `call'
+puma (4.3.6) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.6) lib/puma/server.rb:472:in `process_client'
+puma (4.3.6) lib/puma/server.rb:328:in `block in run'
+puma (4.3.6) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/api/v1/users" for ::1 at 2020-09-29 22:08:40 +0530
+Processing by Api::V1::UsersController#index as JSON
+[active_model_serializers] Rendered UsersSerializer with ActiveModelSerializers::Adapter::Attributes (5.64ms)
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.0ms | Allocations: 1168)
+
+
+  
+NoMethodError (undefined method `model_name' for UsersSerializer:Class
+Did you mean?  module_parent):
+  
+app/controllers/api/v1/users_controller.rb:4:in `index'
+Started GET "/api/v1/users" for ::1 at 2020-09-29 22:08:50 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::V1::UsersController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ?[0m  [["LIMIT", 11]]
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 0.0ms | Allocations: 7294)
+
+
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ?[0m  [["LIMIT", 11]]
+  
+NoMethodError (undefined method `read_attribute_for_serialization' for #<User::ActiveRecord_Relation:0x00007f2cf4130600>):
+  
+app/controllers/api/v1/users_controller.rb:4:in `index'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ?[0m  [["LIMIT", 11]]
+Started GET "/api/v1/users" for ::1 at 2020-09-29 22:10:54 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::V1::UsersController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/v1/users_controller.rb:4:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.59ms)
+Completed 200 OK in 10ms (Views: 7.5ms | ActiveRecord: 0.8ms | Allocations: 6059)
+
+
+Started GET "/api/v1/users/1" for ::1 at 2020-09-29 22:15:33 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::V1::UsersController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:34:in `get_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.19ms)
+Completed 200 OK in 11ms (Views: 1.2ms | ActiveRecord: 1.1ms | Allocations: 5794)
+
+
+Started GET "/api/v1/users/1" for ::1 at 2020-09-29 22:24:07 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::V1::UsersController#show as JSON
+  Parameters: {"email"=>"update_email@gmail.com", "firstName"=>"update_first_name", "lastName"=>"updated_last_name", "id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:42:in `get_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.1ms)
+Completed 200 OK in 9ms (Views: 0.8ms | ActiveRecord: 0.2ms | Allocations: 5434)
+
+
+Started PUT "/api/v1/users/1" for ::1 at 2020-09-29 22:24:16 +0530
+Processing by Api::V1::UsersController#update as JSON
+  Parameters: {"email"=>"update_email@gmail.com", "firstName"=>"update_first_name", "lastName"=>"updated_last_name", "id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:42:in `get_user'
+[31mUnpermitted parameters: :format, :id[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "update_email@gmail.com"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+  [1m[36mUser Update (1.3ms)[0m  [1m[33mUPDATE "users" SET "email" = ?, "firstName" = ?, "lastName" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["email", "update_email@gmail.com"], ["firstName", "update_first_name"], ["lastName", "updated_last_name"], ["updated_at", "2020-09-29 16:54:16.733897"], ["id", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+  [1m[35m (155.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.14ms)
+Completed 200 OK in 175ms (Views: 1.8ms | ActiveRecord: 157.6ms | Allocations: 5637)
+
+
+Started PUT "/api/v1/users/1" for ::1 at 2020-09-29 22:24:21 +0530
+Processing by Api::V1::UsersController#update as JSON
+  Parameters: {"email"=>"update_email@gmail.com", "firstName"=>"update_first_name", "lastName"=>"updated_last_name2", "id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:42:in `get_user'
+[31mUnpermitted parameters: :format, :id[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "update_email@gmail.com"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+  [1m[36mUser Update (5.5ms)[0m  [1m[33mUPDATE "users" SET "lastName" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["lastName", "updated_last_name2"], ["updated_at", "2020-09-29 16:54:21.796131"], ["id", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+  [1m[35m (180.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.36ms)
+Completed 200 OK in 206ms (Views: 1.2ms | ActiveRecord: 186.5ms | Allocations: 5534)
+
+
+Started PUT "/api/v1/users/1" for ::1 at 2020-09-29 22:24:25 +0530
+Processing by Api::V1::UsersController#update as JSON
+  Parameters: {"email"=>"update_email@gmail.com", "firstName"=>"update_first_name", "lastName"=>"updated_last_name", "id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:42:in `get_user'
+[31mUnpermitted parameters: :format, :id[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "update_email@gmail.com"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+  [1m[36mUser Update (0.3ms)[0m  [1m[33mUPDATE "users" SET "lastName" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["lastName", "updated_last_name"], ["updated_at", "2020-09-29 16:54:25.228557"], ["id", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+  [1m[35m (164.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.27ms)
+Completed 200 OK in 176ms (Views: 1.2ms | ActiveRecord: 164.8ms | Allocations: 5550)
+
+
+Started PUT "/api/v1/users/78" for ::1 at 2020-09-29 22:24:31 +0530
+Processing by Api::V1::UsersController#update as JSON
+  Parameters: {"email"=>"update_email@gmail.com", "firstName"=>"update_first_name", "lastName"=>"updated_last_name", "id"=>"78"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 78], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:42:in `get_user'
+Completed 500 Internal Server Error in 2ms (Views: 0.4ms | ActiveRecord: 0.2ms | Allocations: 731)
+
+
+Started PUT "/api/v1/users/1" for ::1 at 2020-09-29 22:24:45 +0530
+Processing by Api::V1::UsersController#update as JSON
+  Parameters: {"email"=>"update_email@gmail.com", "firstName"=>"update_first_name", "lastName"=>"updated_last_name", "id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:42:in `get_user'
+[31mUnpermitted parameters: :format, :id[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "update_email@gmail.com"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.14ms)
+Completed 200 OK in 31ms (Views: 0.6ms | ActiveRecord: 0.6ms | Allocations: 3613)
+
+
+Started PUT "/api/v1/users/2" for ::1 at 2020-09-29 22:24:54 +0530
+Processing by Api::V1::UsersController#update as JSON
+  Parameters: {"email"=>"update_email@gmail.com", "firstName"=>"update_first_name", "lastName"=>"updated_last_name", "id"=>"2"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:42:in `get_user'
+[31mUnpermitted parameters: :format, :id[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "update_email@gmail.com"], ["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+Completed 500 Internal Server Error in 10ms (Views: 0.2ms | ActiveRecord: 0.6ms | Allocations: 4023)
+
+
+Started PUT "/api/v1/users/1" for ::1 at 2020-09-29 22:24:58 +0530
+Processing by Api::V1::UsersController#update as JSON
+  Parameters: {"email"=>"update_email@gmail.com", "firstName"=>"update_first_name", "lastName"=>"updated_last_name", "id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:42:in `get_user'
+[31mUnpermitted parameters: :format, :id[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "update_email@gmail.com"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.14ms)
+Completed 200 OK in 8ms (Views: 0.7ms | ActiveRecord: 0.5ms | Allocations: 3610)
+
+
+Started PUT "/api/v1/users/1" for ::1 at 2020-09-29 22:25:06 +0530
+Processing by Api::V1::UsersController#update as JSON
+  Parameters: {"email"=>"update_email@gmail.com", "firstName"=>"update_first_name", "lastName"=>"updated_last_name", "id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:42:in `get_user'
+[31mUnpermitted parameters: :format, :id[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "update_email@gmail.com"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.14ms)
+Completed 200 OK in 9ms (Views: 0.6ms | ActiveRecord: 0.8ms | Allocations: 3610)
+
+
+Started DELETE "/api/v1/users/1" for ::1 at 2020-09-29 22:25:28 +0530
+Processing by Api::V1::UsersController#destroy as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:42:in `get_user'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:30:in `destroy'
+  [1m[36mUser Destroy (1.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:30:in `destroy'
+  [1m[35m (183.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:30:in `destroy'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Completed 200 OK in 193ms (Views: 0.8ms | ActiveRecord: 184.5ms | Allocations: 3662)
+
+
+Started DELETE "/api/v1/users/1" for ::1 at 2020-09-29 22:25:48 +0530
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::V1::UsersController#destroy as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:42:in `get_user'
+Completed 500 Internal Server Error in 4ms (Views: 0.4ms | ActiveRecord: 0.8ms | Allocations: 1997)
+
+
+Started DELETE "/api/v1/users/2" for ::1 at 2020-09-29 22:25:52 +0530
+Processing by Api::V1::UsersController#destroy as JSON
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:42:in `get_user'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:30:in `destroy'
+  [1m[36mUser Destroy (0.8ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 2]]
+  ↳ app/controllers/api/v1/users_controller.rb:30:in `destroy'
+  [1m[35m (160.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:30:in `destroy'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.08ms)
+Completed 200 OK in 178ms (Views: 0.6ms | ActiveRecord: 161.7ms | Allocations: 7257)
+
+
+Started GET "/api/v1/users/1" for ::1 at 2020-09-29 22:25:57 +0530
+Processing by Api::V1::UsersController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:42:in `get_user'
+Completed 500 Internal Server Error in 3ms (Views: 0.8ms | ActiveRecord: 0.2ms | Allocations: 656)
+
+
+Started GET "/api/v1/users" for ::1 at 2020-09-29 22:26:00 +0530
+Processing by Api::V1::UsersController#index as JSON
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:6:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (2.67ms)
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.2ms | Allocations: 1478)
+
+
+Started GET "/api/v1/users" for ::1 at 2020-09-29 22:28:59 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::V1::UsersController#index as JSON
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:6:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.39ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.06ms)
+Completed 200 OK in 10ms (Views: 0.6ms | ActiveRecord: 0.8ms | Allocations: 6150)
+
+
+Started GET "/api/v1/users" for ::1 at 2020-09-29 22:29:16 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::V1::UsersController#index as JSON
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+[active_model_serializers]   ↳ app/controllers/api/v1/users_controller.rb:6:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.35ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Completed 200 OK in 10ms (Views: 0.6ms | ActiveRecord: 0.8ms | Allocations: 6199)
+
+
+Started GET "/api/v1/users/3" for ::1 at 2020-09-29 22:29:23 +0530
+Processing by Api::V1::UsersController#show as JSON
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:42:in `get_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.12ms)
+Completed 200 OK in 4ms (Views: 0.5ms | ActiveRecord: 0.3ms | Allocations: 942)
+
+
+Started PUT "/api/v1/users/3" for ::1 at 2020-09-29 22:29:31 +0530
+Processing by Api::V1::UsersController#update as JSON
+  Parameters: {"email"=>"update_email@gmail.com", "firstName"=>"update_first_name", "lastName"=>"updated_last_name", "id"=>"3"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:42:in `get_user'
+[31mUnpermitted parameters: :format, :id[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "update_email@gmail.com"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+  [1m[36mUser Update (0.4ms)[0m  [1m[33mUPDATE "users" SET "email" = ?, "firstName" = ?, "lastName" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["email", "update_email@gmail.com"], ["firstName", "update_first_name"], ["lastName", "updated_last_name"], ["updated_at", "2020-09-29 16:59:31.155177"], ["id", 3]]
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+  [1m[35m (228.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/users_controller.rb:25:in `update'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.1ms)
+Completed 200 OK in 248ms (Views: 0.5ms | ActiveRecord: 229.9ms | Allocations: 5607)
+
+
+Started POST "/api/users" for ::1 at 2020-09-29 23:00:00 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  
+ActionController::RoutingError (No route matches [POST] "/api/users"):
+  
+actionpack (6.0.3.3) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.3) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.3) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.3) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3.3) lib/rails/engine.rb:527:in `call'
+puma (4.3.6) lib/puma/configuration.rb:228:in `call'
+puma (4.3.6) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.6) lib/puma/server.rb:472:in `process_client'
+puma (4.3.6) lib/puma/server.rb:328:in `block in run'
+puma (4.3.6) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+DEPRECATION WARNING: Using `bin/rake routes` is deprecated and will be removed in Rails 6.1. Use `bin/rails routes` instead.
+ (called from load at /home/user/.rvm/gems/ruby-2.6.0/bin/rake:23)
+DEPRECATION WARNING: Using `bin/rake routes` is deprecated and will be removed in Rails 6.1. Use `bin/rails routes` instead.
+ (called from load at /home/user/.rvm/gems/ruby-2.6.0/bin/rake:23)
+Started POST "/api/users" for ::1 at 2020-09-29 23:00:45 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  
+NameError (uninitialized constant Api::V1):
+  
+app/controllers/api/users_controller.rb:1:in `<main>'
+Started POST "/api/users" for ::1 at 2020-09-29 23:00:59 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"test3@gmail.com", "firstName"=>"test1", "lastName"=>"test2"}
+[31mUnpermitted parameter: :format[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "test3@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("firstName", "lastName", "email", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["firstName", "test1"], ["lastName", "test2"], ["email", "test3@gmail.com"], ["created_at", "2020-09-29 17:30:59.609726"], ["updated_at", "2020-09-29 17:30:59.609726"]]
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[35m (150.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "test3@gmail.com"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.13ms)
+Completed 200 OK in 175ms (Views: 1.6ms | ActiveRecord: 153.0ms | Allocations: 12488)
+
+
+Started POST "/api/users" for ::1 at 2020-09-29 23:01:02 +0530
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"test3@gmail.com", "firstName"=>"test1", "lastName"=>"test2"}
+[31mUnpermitted parameter: :format[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "test3@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+Completed 500 Internal Server Error in 8ms (Views: 0.3ms | ActiveRecord: 0.5ms | Allocations: 3445)
+
+
+Started POST "/api/users" for ::1 at 2020-09-29 23:01:10 +0530
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"test4@gmail.com", "firstName"=>"test1", "lastName"=>"test2"}
+[31mUnpermitted parameter: :format[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "test4@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[36mUser Create (4.0ms)[0m  [1m[32mINSERT INTO "users" ("firstName", "lastName", "email", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["firstName", "test1"], ["lastName", "test2"], ["email", "test4@gmail.com"], ["created_at", "2020-09-29 17:31:10.933525"], ["updated_at", "2020-09-29 17:31:10.933525"]]
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[35m (162.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "test4@gmail.com"], ["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Completed 200 OK in 184ms (Views: 0.5ms | ActiveRecord: 167.3ms | Allocations: 7369)
+
+
+Started POST "/api/users" for ::1 at 2020-09-29 23:01:17 +0530
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"dest4@gmail.com", "firstName"=>"test1", "lastName"=>"test2"}
+[31mUnpermitted parameter: :format[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "dest4@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[36mUser Create (1.4ms)[0m  [1m[32mINSERT INTO "users" ("firstName", "lastName", "email", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["firstName", "test1"], ["lastName", "test2"], ["email", "dest4@gmail.com"], ["created_at", "2020-09-29 17:31:17.948144"], ["updated_at", "2020-09-29 17:31:17.948144"]]
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[35m (165.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "dest4@gmail.com"], ["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.1ms)
+Completed 200 OK in 189ms (Views: 0.5ms | ActiveRecord: 168.0ms | Allocations: 7366)
+
+
+Started POST "/api/users" for ::1 at 2020-09-29 23:01:28 +0530
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"issac@gmail.com", "firstName"=>"test1", "lastName"=>"test2"}
+[31mUnpermitted parameter: :format[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "issac@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[36mUser Create (1.6ms)[0m  [1m[32mINSERT INTO "users" ("firstName", "lastName", "email", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["firstName", "test1"], ["lastName", "test2"], ["email", "issac@gmail.com"], ["created_at", "2020-09-29 17:31:28.168710"], ["updated_at", "2020-09-29 17:31:28.168710"]]
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[35m (163.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[35m (1.4ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "issac@gmail.com"], ["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.13ms)
+Completed 200 OK in 193ms (Views: 0.5ms | ActiveRecord: 168.0ms | Allocations: 7366)
+
+
+Started POST "/api/users" for ::1 at 2020-09-29 23:01:45 +0530
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"issac2@gmail.com", "firstName"=>"issac", "lastName"=>"marie"}
+[31mUnpermitted parameter: :format[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "issac2@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("firstName", "lastName", "email", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["firstName", "issac"], ["lastName", "marie"], ["email", "issac2@gmail.com"], ["created_at", "2020-09-29 17:31:45.193056"], ["updated_at", "2020-09-29 17:31:45.193056"]]
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[35m (185.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "issac2@gmail.com"], ["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Completed 200 OK in 199ms (Views: 0.4ms | ActiveRecord: 186.6ms | Allocations: 7369)
+
+
+Started POST "/api/users" for ::1 at 2020-09-29 23:01:59 +0530
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"marie3@gmail.com", "firstName"=>"issac", "lastName"=>"marie"}
+[31mUnpermitted parameter: :format[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "marie3@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[36mUser Create (1.6ms)[0m  [1m[32mINSERT INTO "users" ("firstName", "lastName", "email", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["firstName", "issac"], ["lastName", "marie"], ["email", "marie3@gmail.com"], ["created_at", "2020-09-29 17:31:59.571037"], ["updated_at", "2020-09-29 17:31:59.571037"]]
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[35m (142.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "marie3@gmail.com"], ["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.39ms)
+Completed 200 OK in 161ms (Views: 1.9ms | ActiveRecord: 145.1ms | Allocations: 7369)
+
+
+Started POST "/api/users" for ::1 at 2020-09-29 23:02:07 +0530
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"marie3@gmail.com", "firstName"=>"issac", "lastName"=>"issac"}
+[31mUnpermitted parameter: :format[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "marie3@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+Completed 500 Internal Server Error in 16ms (Views: 0.3ms | ActiveRecord: 0.5ms | Allocations: 3327)
+
+
+Started POST "/api/users" for ::1 at 2020-09-29 23:02:11 +0530
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"marie4@gmail.com", "firstName"=>"issac", "lastName"=>"issac"}
+[31mUnpermitted parameter: :format[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "marie4@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("firstName", "lastName", "email", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["firstName", "issac"], ["lastName", "issac"], ["email", "marie4@gmail.com"], ["created_at", "2020-09-29 17:32:11.484568"], ["updated_at", "2020-09-29 17:32:11.484568"]]
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[35m (140.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "marie4@gmail.com"], ["id", 10], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.09ms)
+Completed 200 OK in 159ms (Views: 0.4ms | ActiveRecord: 141.8ms | Allocations: 7369)
+
+
+Started POST "/api/users" for ::1 at 2020-09-29 23:02:34 +0530
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"marie5@gmail.com", "firstName"=>"marie", "lastName"=>"curie"}
+[31mUnpermitted parameter: :format[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "marie5@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("firstName", "lastName", "email", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["firstName", "marie"], ["lastName", "curie"], ["email", "marie5@gmail.com"], ["created_at", "2020-09-29 17:32:34.042979"], ["updated_at", "2020-09-29 17:32:34.042979"]]
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[35m (219.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "marie5@gmail.com"], ["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.31ms)
+Completed 200 OK in 249ms (Views: 1.6ms | ActiveRecord: 221.1ms | Allocations: 7372)
+
+
+Started POST "/api/users" for ::1 at 2020-09-29 23:02:44 +0530
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"marie6@gmail.com", "firstName"=>"marie_and_issac", "lastName"=>"curie"}
+[31mUnpermitted parameter: :format[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "marie6@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[36mUser Create (2.5ms)[0m  [1m[32mINSERT INTO "users" ("firstName", "lastName", "email", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["firstName", "marie_and_issac"], ["lastName", "curie"], ["email", "marie6@gmail.com"], ["created_at", "2020-09-29 17:32:44.771153"], ["updated_at", "2020-09-29 17:32:44.771153"]]
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[35m (153.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:15:in `create'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "marie6@gmail.com"], ["id", 12], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:16:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.66ms)
+Completed 200 OK in 174ms (Views: 4.5ms | ActiveRecord: 156.3ms | Allocations: 7370)
+
+
+Started GET "/api/typehead/marie" for ::1 at 2020-09-29 23:02:51 +0530
+Processing by Api::UsersController#typehead as JSON
+  Parameters: {"input"=>"marie"}
+Completed 500 Internal Server Error in 4ms (Views: 0.4ms | ActiveRecord: 0.0ms | Allocations: 1632)
+
+
+Started GET "/api/typehead/marie" for ::1 at 2020-09-29 23:03:43 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::UsersController#typehead as JSON
+  Parameters: {"input"=>"marie"}
+Completed 500 Internal Server Error in 2ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 1873)
+
+
+Started GET "/api/typehead/marie" for ::1 at 2020-09-29 23:03:54 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::UsersController#typehead as JSON
+  Parameters: {"input"=>"marie"}
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (email like '%?' OR firstName like '%? OR lastName like '%?')[0m
+[active_model_serializers]   ↳ app/controllers/api/users_controller.rb:41:in `typehead'
+Completed 500 Internal Server Error in 3ms (Views: 0.4ms | ActiveRecord: 0.2ms | Allocations: 1918)
+
+
+Started GET "/api/typehead/marie" for ::1 at 2020-09-29 23:04:28 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::UsersController#typehead as JSON
+  Parameters: {"input"=>"marie"}
+[active_model_serializers]   [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (email like '%'marie'' OR firstName like '%'marie' OR lastName like '%'marie'')[0m
+[active_model_serializers]   ↳ app/controllers/api/users_controller.rb:41:in `typehead'
+Completed 500 Internal Server Error in 7ms (Views: 0.4ms | ActiveRecord: 0.4ms | Allocations: 1992)
+
+
+Started GET "/api/typehead/marie" for ::1 at 2020-09-29 23:06:22 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::UsersController#typehead as JSON
+  Parameters: {"input"=>"marie"}
+[active_model_serializers]   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (email like '%marie' OR firstName like '%marie' OR lastName like '%marie')[0m
+[active_model_serializers]   ↳ app/controllers/api/users_controller.rb:41:in `typehead'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.56ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.15ms)
+Completed 200 OK in 13ms (Views: 0.8ms | ActiveRecord: 1.0ms | Allocations: 6584)
+
+
+Started GET "/api/typehead/mar" for ::1 at 2020-09-29 23:06:31 +0530
+Processing by Api::UsersController#typehead as JSON
+  Parameters: {"input"=>"mar"}
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (email like '%mar' OR firstName like '%mar' OR lastName like '%mar')[0m
+[active_model_serializers]   ↳ app/controllers/api/users_controller.rb:41:in `typehead'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.05ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.08ms)
+Completed 200 OK in 3ms (Views: 0.5ms | ActiveRecord: 0.2ms | Allocations: 1181)
+
+
+Started GET "/api/typehead/mar" for ::1 at 2020-09-29 23:07:05 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::UsersController#typehead as JSON
+  Parameters: {"input"=>"mar"}
+[active_model_serializers]   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (email like 'mar%' OR firstName like 'mar%' OR lastName like 'mar%')[0m
+[active_model_serializers]   ↳ app/controllers/api/users_controller.rb:41:in `typehead'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (1.1ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.34ms)
+Completed 200 OK in 17ms (Views: 1.1ms | ActiveRecord: 1.2ms | Allocations: 6807)
+
+
+Started GET "/api/typehead/cu" for ::1 at 2020-09-29 23:07:16 +0530
+Processing by Api::UsersController#typehead as JSON
+  Parameters: {"input"=>"cu"}
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (email like 'cu%' OR firstName like 'cu%' OR lastName like 'cu%')[0m
+[active_model_serializers]   ↳ app/controllers/api/users_controller.rb:41:in `typehead'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.26ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.11ms)
+Completed 200 OK in 2ms (Views: 0.4ms | ActiveRecord: 0.2ms | Allocations: 1448)
+
+
+Started GET "/api/typehead/iss" for ::1 at 2020-09-29 23:07:22 +0530
+Processing by Api::UsersController#typehead as JSON
+  Parameters: {"input"=>"iss"}
+[active_model_serializers]   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (email like 'iss%' OR firstName like 'iss%' OR lastName like 'iss%')[0m
+[active_model_serializers]   ↳ app/controllers/api/users_controller.rb:41:in `typehead'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.94ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.25ms)
+Completed 200 OK in 5ms (Views: 1.2ms | ActiveRecord: 0.3ms | Allocations: 1713)
+
+
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+Started POST "/api/users" for ::1 at 2020-09-29 23:14:05 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  
+SyntaxError (/home/user/work/9edb18fc78cfd5cb5420/database_connect/app/controllers/api/users_controller.rb:60: syntax error, unexpected tLABEL, expecting do or '{' or '('
+...X_PATTERN ? true : render json:{error:"email format is not v...
+...                          ^~~~~):
+  
+app/controllers/api/users_controller.rb:60: syntax error, unexpected tLABEL, expecting do or '{' or '('
+app/controllers/api/users_controller.rb:60: syntax error, unexpected tLABEL, expecting do or '{' or '('
+Started POST "/api/users" for ::1 at 2020-09-29 23:15:52 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"marie6gmail.com", "firstName"=>"marie_and_issac", "lastName"=>"curie"}
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.06ms)
+Filter chain halted as :check_email_valid? rendered or redirected
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 460)
+
+
+Started POST "/api/users" for ::1 at 2020-09-29 23:15:58 +0530
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"marie6@gmail.com", "firstName"=>"marie_and_issac", "lastName"=>"curie"}
+[31mUnpermitted parameter: :format[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:17:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "marie6@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:17:in `create'
+  [1m[35m (0.2ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/users_controller.rb:17:in `create'
+Completed 500 Internal Server Error in 30ms (Views: 0.3ms | ActiveRecord: 1.7ms | Allocations: 8094)
+
+
+Started GET "/api/typehead/mar" for ::1 at 2020-09-29 23:16:42 +0530
+Processing by Api::UsersController#typehead as JSON
+  Parameters: {"input"=>"mar"}
+[active_model_serializers]   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (email like 'mar%' OR firstName like 'mar%' OR lastName like 'mar%')[0m
+[active_model_serializers]   ↳ app/controllers/api/users_controller.rb:43:in `typehead'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.85ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.33ms)
+Completed 200 OK in 11ms (Views: 1.0ms | ActiveRecord: 0.3ms | Allocations: 3328)
+
+
+Started GET "/api/users" for ::1 at 2020-09-29 23:24:59 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::UsersController#index as JSON
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ?[0m  [["LIMIT", 11]]
+  ↳ app/controllers/application_controller.rb:6:in `message'
+Completed 500 Internal Server Error in 26ms (Views: 0.8ms | ActiveRecord: 0.3ms | Allocations: 7979)
+
+
+Started GET "/api/users" for ::1 at 2020-09-29 23:31:19 +0530
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::UsersController#index as JSON
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 3], ["OFFSET", 0]]
+  ↳ app/controllers/api/users_controller.rb:13:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:14:in `index'
+Completed 500 Internal Server Error in 228ms (Views: 0.4ms | ActiveRecord: 1.9ms | Allocations: 77989)
+
+
+Started GET "/api/users" for ::1 at 2020-09-29 23:31:34 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::UsersController#index as JSON
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 3], ["OFFSET", 0]]
+  ↳ app/controllers/api/users_controller.rb:13:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:14:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+[active_model_serializers]   ↳ app/controllers/api/users_controller.rb:21:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.95ms)
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:25:in `index'
+Completed 500 Internal Server Error in 23ms (Views: 0.4ms | ActiveRecord: 2.2ms | Allocations: 11684)
+
+
+Started GET "/api/users" for ::1 at 2020-09-29 23:31:55 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::UsersController#index as JSON
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 3], ["OFFSET", 0]]
+  ↳ app/controllers/api/users_controller.rb:13:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:14:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+[active_model_serializers]   ↳ app/controllers/api/users_controller.rb:21:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (2.15ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.39ms)
+Completed 200 OK in 22ms (Views: 2.3ms | ActiveRecord: 1.6ms | Allocations: 9418)
+
+
+Started GET "/api/users" for ::1 at 2020-09-29 23:32:45 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::UsersController#index as JSON
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 3], ["OFFSET", 0]]
+  ↳ app/controllers/api/users_controller.rb:13:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:14:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (1.66ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.65ms)
+Completed 200 OK in 35ms (Views: 1.6ms | ActiveRecord: 1.7ms | Allocations: 7699)
+
+
+Started GET "/api/users" for ::1 at 2020-09-29 23:33:00 +0530
+Processing by Api::UsersController#index as JSON
+  Parameters: {"page"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 3], ["OFFSET", 0]]
+  ↳ app/controllers/api/users_controller.rb:13:in `index'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:14:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.35ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.16ms)
+Completed 200 OK in 5ms (Views: 0.5ms | ActiveRecord: 0.4ms | Allocations: 2714)
+
+
+Started GET "/api/users" for ::1 at 2020-09-29 23:33:09 +0530
+Processing by Api::UsersController#index as JSON
+  Parameters: {"page"=>"2"}
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 3], ["OFFSET", 3]]
+  ↳ app/controllers/api/users_controller.rb:13:in `index'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:14:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.34ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.27ms)
+Completed 200 OK in 6ms (Views: 0.8ms | ActiveRecord: 0.6ms | Allocations: 2695)
+
+
+Started GET "/api/users" for ::1 at 2020-09-29 23:33:25 +0530
+Processing by Api::UsersController#index as JSON
+  Parameters: {"page"=>"4"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 3], ["OFFSET", 9]]
+  ↳ app/controllers/api/users_controller.rb:13:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:14:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.32ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.19ms)
+Completed 200 OK in 6ms (Views: 0.9ms | ActiveRecord: 0.4ms | Allocations: 2432)
+
+
+Started GET "/api/users" for ::1 at 2020-09-29 23:34:30 +0530
+Processing by Api::UsersController#index as JSON
+  Parameters: {"page"=>"2"}
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 3], ["OFFSET", 3]]
+  ↳ app/controllers/api/users_controller.rb:13:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:14:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.72ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.29ms)
+Completed 200 OK in 7ms (Views: 1.0ms | ActiveRecord: 0.6ms | Allocations: 2695)
+
+
+Started POST "/api/users" for ::1 at 2020-09-29 23:34:48 +0530
+Processing by Api::UsersController#create as JSON
+  Parameters: {"email"=>"marie7@gmail.com", "firstName"=>"marie_and_issac", "lastName"=>"curie"}
+[31mUnpermitted parameter: :format[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:32:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "marie7@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:32:in `create'
+  [1m[36mUser Create (1.4ms)[0m  [1m[32mINSERT INTO "users" ("firstName", "lastName", "email", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["firstName", "marie_and_issac"], ["lastName", "curie"], ["email", "marie7@gmail.com"], ["created_at", "2020-09-29 18:04:48.839260"], ["updated_at", "2020-09-29 18:04:48.839260"]]
+  ↳ app/controllers/api/users_controller.rb:32:in `create'
+  [1m[35m (186.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:32:in `create'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:33:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "marie7@gmail.com"], ["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:33:in `create'
+  [1m[35m (0.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:33:in `create'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.19ms)
+Completed 200 OK in 226ms (Views: 1.0ms | ActiveRecord: 188.7ms | Allocations: 9317)
+
+
+Started GET "/api/users/3" for ::1 at 2020-09-29 23:35:02 +0530
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:68:in `get_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.12ms)
+Completed 200 OK in 2ms (Views: 0.5ms | ActiveRecord: 0.2ms | Allocations: 948)
+
+
+Started PUT "/api/users/3" for ::1 at 2020-09-29 23:35:23 +0530
+Processing by Api::UsersController#update as JSON
+  Parameters: {"email"=>"update_email@gmail.com", "firstName"=>"update_first_name", "lastName"=>"updated_last_name2", "id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:68:in `get_user'
+[31mUnpermitted parameters: :format, :id[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:47:in `update'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "update_email@gmail.com"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:47:in `update'
+  [1m[36mUser Update (1.3ms)[0m  [1m[33mUPDATE "users" SET "lastName" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["lastName", "updated_last_name2"], ["updated_at", "2020-09-29 18:05:23.648420"], ["id", 3]]
+  ↳ app/controllers/api/users_controller.rb:47:in `update'
+  [1m[35m (137.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:47:in `update'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.08ms)
+Completed 200 OK in 153ms (Views: 0.4ms | ActiveRecord: 139.5ms | Allocations: 5568)
+
+
+Started PUT "/api/users/3" for ::1 at 2020-09-29 23:35:27 +0530
+Processing by Api::UsersController#update as JSON
+  Parameters: {"email"=>"update_email@gmail.com", "firstName"=>"update_first_name", "lastName"=>"updated_last_name", "id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:68:in `get_user'
+[31mUnpermitted parameters: :format, :id[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:47:in `update'
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "update_email@gmail.com"], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:47:in `update'
+  [1m[36mUser Update (0.9ms)[0m  [1m[33mUPDATE "users" SET "lastName" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["lastName", "updated_last_name"], ["updated_at", "2020-09-29 18:05:28.007803"], ["id", 3]]
+  ↳ app/controllers/api/users_controller.rb:47:in `update'
+  [1m[35m (115.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:47:in `update'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.16ms)
+Completed 200 OK in 147ms (Views: 0.8ms | ActiveRecord: 116.8ms | Allocations: 5534)
+
+
+Started GET "/api/users/3" for ::1 at 2020-09-29 23:35:30 +0530
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:68:in `get_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.47ms)
+Completed 200 OK in 2ms (Views: 0.9ms | ActiveRecord: 0.1ms | Allocations: 823)
+
+
+Started DELETE "/api/users/2" for ::1 at 2020-09-29 23:35:35 +0530
+Processing by Api::UsersController#destroy as JSON
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:68:in `get_user'
+Completed 500 Internal Server Error in 2ms (Views: 0.4ms | ActiveRecord: 0.2ms | Allocations: 723)
+
+
+Started DELETE "/api/users/3" for ::1 at 2020-09-29 23:35:39 +0530
+Processing by Api::UsersController#destroy as JSON
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:68:in `get_user'
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/users_controller.rb:52:in `destroy'
+  [1m[36mUser Destroy (1.5ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 3]]
+  ↳ app/controllers/api/users_controller.rb:52:in `destroy'
+  [1m[35m (117.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/users_controller.rb:52:in `destroy'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.07ms)
+Completed 200 OK in 132ms (Views: 1.0ms | ActiveRecord: 119.5ms | Allocations: 3674)
+
+
+Started GET "/api/typehead/mar" for ::1 at 2020-09-29 23:35:49 +0530
+Processing by Api::UsersController#typehead as JSON
+  Parameters: {"input"=>"mar"}
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE (email like 'mar%' OR firstName like 'mar%' OR lastName like 'mar%')[0m
+[active_model_serializers]   ↳ app/controllers/api/users_controller.rb:58:in `typehead'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (1.03ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.34ms)
+Completed 200 OK in 4ms (Views: 0.8ms | ActiveRecord: 0.2ms | Allocations: 1990)
+
+
+Started GET "/api/users" for ::1 at 2020-09-29 23:37:06 +0530
+  [1m[35m (2.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::UsersController#index as JSON
+  Parameters: {"page"=>"2"}
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 3], ["OFFSET", 3]]
+  ↳ app/controllers/api/users_controller.rb:13:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:14:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (2.65ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (3.93ms)
+Completed 200 OK in 69ms (Views: 7.6ms | ActiveRecord: 4.5ms | Allocations: 9335)
+
+
+Started GET "/api/users/3" for ::1 at 2020-09-29 23:37:12 +0530
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:68:in `get_user'
+Completed 500 Internal Server Error in 8ms (Views: 1.7ms | ActiveRecord: 0.3ms | Allocations: 1157)
+
+
+Started GET "/api/users/4" for ::1 at 2020-09-29 23:37:16 +0530
+Processing by Api::UsersController#show as JSON
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/api/users_controller.rb:68:in `get_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.14ms)
+Completed 200 OK in 3ms (Views: 0.8ms | ActiveRecord: 0.3ms | Allocations: 840)
+
+
+Started GET "/api/users" for ::1 at 2020-09-29 23:41:18 +0530
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::UsersController#index as JSON
+  Parameters: {"page"=>"2"}
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 3], ["OFFSET", 3]]
+  ↳ app/controllers/api/users_controller.rb:13:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:14:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.9ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (2.26ms)
+Completed 200 OK in 53ms (Views: 6.9ms | ActiveRecord: 3.8ms | Allocations: 9204)
+
+
+Started GET "/api/users" for ::1 at 2020-09-29 23:41:38 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::UsersController#index as JSON
+  Parameters: {"page"=>"2"}
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 3], ["OFFSET", 3]]
+  ↳ app/controllers/api/users_controller.rb:13:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:14:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.57ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.26ms)
+Completed 200 OK in 28ms (Views: 1.0ms | ActiveRecord: 1.5ms | Allocations: 7696)
+
+
+Started GET "/api/users" for ::1 at 2020-09-29 23:41:42 +0530
+Processing by Api::UsersController#index as JSON
+  Parameters: {"page"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 3], ["OFFSET", 0]]
+  ↳ app/controllers/api/users_controller.rb:13:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:14:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.57ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.62ms)
+Completed 200 OK in 12ms (Views: 5.2ms | ActiveRecord: 0.6ms | Allocations: 2712)
+
+
+Started GET "/api/users" for ::1 at 2020-09-29 23:41:46 +0530
+Processing by Api::UsersController#index as JSON
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 3], ["OFFSET", 0]]
+  ↳ app/controllers/api/users_controller.rb:13:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:14:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.35ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.27ms)
+Completed 200 OK in 6ms (Views: 1.4ms | ActiveRecord: 0.4ms | Allocations: 2713)
+
+
+Started GET "/api/users" for ::1 at 2020-09-29 23:41:50 +0530
+Processing by Api::UsersController#index as JSON
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 3], ["OFFSET", 0]]
+  ↳ app/controllers/api/users_controller.rb:13:in `index'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:14:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.49ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.26ms)
+Completed 200 OK in 6ms (Views: 0.6ms | ActiveRecord: 0.5ms | Allocations: 2713)
+
+
+Started GET "/api/users" for ::1 at 2020-09-29 23:41:55 +0530
+Processing by Api::UsersController#index as JSON
+  Parameters: {"page"=>"3"}
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 3], ["OFFSET", 6]]
+  ↳ app/controllers/api/users_controller.rb:13:in `index'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:14:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.34ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.21ms)
+Completed 200 OK in 5ms (Views: 0.6ms | ActiveRecord: 0.4ms | Allocations: 2692)
+
+
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+Started GET "/api/users" for ::1 at 2020-09-29 23:42:48 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::UsersController#index as JSON
+  Parameters: {"page"=>"3"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 3], ["OFFSET", 6]]
+  ↳ app/controllers/api/users_controller.rb:13:in `index'
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:14:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.83ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.2ms)
+Completed 200 OK in 19ms (Views: 0.9ms | ActiveRecord: 2.1ms | Allocations: 7653)
+
+
+Started GET "/api/users" for ::1 at 2020-09-29 23:42:54 +0530
+Processing by Api::UsersController#index as JSON
+  Parameters: {"page"=>"3", "per_page"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 1], ["OFFSET", 2]]
+  ↳ app/controllers/api/users_controller.rb:13:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:14:in `index'
+Completed 500 Internal Server Error in 7ms (Views: 0.3ms | ActiveRecord: 0.5ms | Allocations: 2103)
+
+
+Started GET "/api/users" for ::1 at 2020-09-29 23:43:44 +0530
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by Api::UsersController#index as JSON
+  Parameters: {"page"=>"3", "per_page"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 1], ["OFFSET", 2]]
+  ↳ app/controllers/api/users_controller.rb:13:in `index'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:14:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.56ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.27ms)
+Completed 200 OK in 21ms (Views: 2.9ms | ActiveRecord: 1.7ms | Allocations: 7392)
+
+
+Started GET "/api/users" for ::1 at 2020-09-29 23:43:49 +0530
+Processing by Api::UsersController#index as JSON
+  Parameters: {"page"=>"3"}
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 3], ["OFFSET", 6]]
+  ↳ app/controllers/api/users_controller.rb:13:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:14:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.49ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.29ms)
+Completed 200 OK in 8ms (Views: 0.8ms | ActiveRecord: 0.7ms | Allocations: 2702)
+
+
+Started GET "/api/users" for ::1 at 2020-09-29 23:43:57 +0530
+Processing by Api::UsersController#index as JSON
+  Parameters: {"page"=>"3", "per_page"=>"1"}
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 1], ["OFFSET", 2]]
+  ↳ app/controllers/api/users_controller.rb:13:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:14:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.56ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.24ms)
+Completed 200 OK in 13ms (Views: 2.4ms | ActiveRecord: 0.6ms | Allocations: 2442)
+
+
+Started GET "/api/users" for ::1 at 2020-09-29 23:44:10 +0530
+Processing by Api::UsersController#index as JSON
+  Parameters: {"page"=>"3", "per_page"=>"3"}
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:9:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" LIMIT ? OFFSET ?[0m  [["LIMIT", 3], ["OFFSET", 6]]
+  ↳ app/controllers/api/users_controller.rb:13:in `index'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/users_controller.rb:14:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.49ms)
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.23ms)
+Completed 200 OK in 7ms (Views: 0.6ms | ActiveRecord: 0.7ms | Allocations: 2706)
+
+
